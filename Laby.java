@@ -1,3 +1,22 @@
+/*
+   Depth-first labyrinth generator using GraphStream.
+   Copyright (C) 2011 fmdkdd <fmdkdd@gmail.com>
+
+   This program is free software: you can redistribute it and/or
+   modify it under the terms of the GNU General Public License as
+   published by the Free Software Foundation, either version 3 of the
+   License, or (at your option) any later version.
+
+   This program is distributed in the hope that it will be useful, but
+   WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   General Public License for more details.
+
+   You should have received a copy of the GNU General Public License
+   along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
@@ -88,10 +107,10 @@ public class Laby {
 		graph.addAttribute("ui.antialias");
 
 		createLabyrinth(size);
-		
+
 		// Let graphstream create the swing display.
 		View view = graph.display(false).getView(VIEW_NAME);
-		
+
 		// And add our own keyListener to toggle showing the solution
 		// when pressing space.
 		view.requestFocus();
@@ -127,7 +146,7 @@ public class Laby {
 			for (int j=0; j < size; ++j) {
 				// Transform the coordinates to a node id.
 				String id = i+","+j;
-			
+
 				// Add an edge to the node to the right, if there is one.
 				String nextid = (i+1)+","+j;
 				if (graph.getNode(nextid) != null)
@@ -216,7 +235,7 @@ public class Laby {
 		// Now we need to turn the graph inside out : nodes should not
 		// be rooms anymore, but room corners, and edges should be walls
 		// between rooms.
-		
+
 		// Create a new grid of walls around the rooms of the previous
 		// model. First create the corners (nodes).
 		for (int i=0; i < size+1; ++i) {
@@ -241,7 +260,7 @@ public class Laby {
 			for (int j=0; j < size+1; ++j) {
 				// Id of the corresponding corner.
 				String id = i+";"+j;
-			
+
 				// Add an edge to the corner to the right .
 				String nextid = (i+1)+";"+ j;
 				if (graph.getNode(nextid) != null)
@@ -361,7 +380,7 @@ public class Laby {
 				// euclidean distance to transform absolutely nothing.
 				double r = Math.max(Math.abs(x), Math.abs(y));
 				double theta = Math.atan2(y,x);
-			
+
 				n.setAttribute("x", r * Math.cos(theta));
 				n.setAttribute("y", r * Math.sin(theta));
 			}
@@ -408,7 +427,7 @@ public class Laby {
 			}
 		}
 	}
-	
+
 	public static void main(String args[]) {
 		if (!(args.length == 1 || args.length == 2)) {
 			System.out.println("Usage : java Laby SIZE [STYLE]");
