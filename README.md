@@ -3,6 +3,8 @@
 This is a labyrinth generator in Java using the [GraphStream][]
 library for dynamic graphs.
 
+![Screenshot](https://raw.githubusercontent.com/fmdkdd/laby-o-matic/master/doc/laby-hell.png)
+
 ## Usage
 
 Compile the source with `make` then run with `./run.sh Laby SIZE
